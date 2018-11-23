@@ -10,8 +10,6 @@ services:
   stock-market-consumer:
     build: stock-consumer
     container_name: stock-market-consumer
-    ports:
-      - "8080:8080"
     environment:
       - spring.activemq.broker-url=tcp://stock-market-activemq:61616
     depends_on:
