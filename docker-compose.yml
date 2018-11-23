@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  stock-market-activemq:
+    image: webcenter/activemq
+    container_name: stock-market-activemq
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+  stock-market-consumer:
+    build: stock-consumer
+    container_name: stock-market-consumer
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.activemq.broker-url=tcp://stock-market-activemq:61616
+    depends_on:
+      - stock-market-activemq
+  stock-market-producer:
+    build: producer
+    container_name: stock-market-producer
+    ports:
+      - "8081:8080"
+    environment:
+      - spring.activemq.broker-url=tcp://stock-market-activemq:61616
+    depends_on:
+      - stock-market-activemq
+

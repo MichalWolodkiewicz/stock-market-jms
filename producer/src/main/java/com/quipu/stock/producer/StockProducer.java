@@ -22,5 +22,6 @@ public class StockProducer {
         int price = new Random().nextInt(100);
         StockPriceDTO stockPriceDTO = new StockPriceDTO("google", String.valueOf(price));
         jmsTemplate.convertAndSend(destination, stockPriceDTO);
+        System.out.println("Stock price produced");
     }
 }
