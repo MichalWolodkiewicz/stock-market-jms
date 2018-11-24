@@ -1,6 +1,7 @@
 package com.quipu.stock.dto;
 
 public class StockPriceDTO {
+    private String uuid;
     private String stockName;
     private String price;
 
@@ -8,7 +9,8 @@ public class StockPriceDTO {
     public StockPriceDTO() {
     }
 
-    public StockPriceDTO(String stockName, String price) {
+    public StockPriceDTO(String uuid, String stockName, String price) {
+        this.uuid = uuid;
         this.stockName = stockName;
         this.price = price;
     }
@@ -29,10 +31,19 @@ public class StockPriceDTO {
         this.price = price;
     }
 
+    String getUuid() {
+        return uuid;
+    }
+
+    void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
     @Override
     public String toString() {
         return "StockPriceDTO{" +
-                "stockName='" + stockName + '\'' +
+                "uuid='" + uuid + '\'' +
+                ", stockName='" + stockName + '\'' +
                 ", price='" + price + '\'' +
                 '}';
     }

@@ -1,6 +1,7 @@
 package com.quipu.stock.dto;
 
 public class StockPriceDTO {
+    private String uuid;
     private String stockName;
     private String price;
 
@@ -8,7 +9,8 @@ public class StockPriceDTO {
     public StockPriceDTO() {
     }
 
-    public StockPriceDTO(String stockName, String price) {
+    public StockPriceDTO(String uuid, String stockName, String price) {
+        this.uuid = uuid;
         this.stockName = stockName;
         this.price = price;
     }
@@ -27,5 +29,13 @@ public class StockPriceDTO {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    String getUuid() {
+        return uuid;
+    }
+
+    void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }
