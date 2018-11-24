@@ -31,11 +31,11 @@ public class StockPriceDTO {
         this.price = price;
     }
 
-    String getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    void setUuid(String uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

@@ -9,18 +9,26 @@ services:
       - "8161:8161"
   stock-market-consumer:
     build: stock-consumer
-    container_name: stock-market-consumer
     environment:
       - spring.activemq.broker-url=tcp://stock-market-activemq:61616
+      - spring.profiles.active=${DESTINATION_PROFILES}
+      - jms.destination.direct.name=${DESTINATION_DIRECT_NAME}
+      - jms.destination.direct.enabled=${DESTINATION_DIRECT_ENABLED}
+      - jms.destination.topic.name=${DESTINATION_TOPIC_NAME}
+      - jms.destination.topic.enabled=${DESTINATION_TOPIC_ENABLED}
     depends_on:
       - stock-market-activemq
   stock-market-producer:
     build: producer
     container_name: stock-market-producer
-    ports:
-      - "8081:8080"
     environment:
       - spring.activemq.broker-url=tcp://stock-market-activemq:61616
+      - spring.profiles.active=${DESTINATION_PROFILES}
+      - producer.interval=${PRODUCER_INTERVAL}
+      - jms.destination.direct.name=${DESTINATION_DIRECT_NAME}
+      - jms.destination.direct.enabled=${DESTINATION_DIRECT_ENABLED}
+      - jms.destination.topic.name=${DESTINATION_TOPIC_NAME}
+      - jms.destination.topic.enabled=${DESTINATION_TOPIC_ENABLED}
     depends_on:
       - stock-market-activemq
 
