@@ -15,6 +15,7 @@ services:
       - jms.destination.direct.name=${DESTINATION_DIRECT_NAME}
       - jms.destination.topic.name=${DESTINATION_TOPIC_NAME}
       - jms.destination.durable=${DESTINATION_DURABLE}
+      - jms.message.selector=${MESSAGE_SELECTOR}
     depends_on:
       - stock-market-activemq
   stock-market-producer:

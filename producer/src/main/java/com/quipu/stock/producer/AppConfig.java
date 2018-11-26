@@ -35,8 +35,8 @@ public class AppConfig {
 
     @Bean
     @Profile("directDestinationEnabled")
-    StockDirectProducer stockDirectProducer(JmsTemplate jmsTemplate) {
-        return new StockDirectProducer(jmsTemplate, directDestination());
+    StockProducer stockDirectProducer(JmsTemplate jmsTemplate) {
+        return new StockProducer(jmsTemplate, false, directDestination());
     }
 
     @Bean
@@ -47,8 +47,8 @@ public class AppConfig {
 
     @Bean
     @Profile("topicDestinationEnabled")
-    StockTopicProducer stockTopicProducer(JmsTemplate jmsTemplate) {
-        return new StockTopicProducer(jmsTemplate, topicDestination());
+    StockProducer stockTopicProducer(JmsTemplate jmsTemplate) {
+        return new StockProducer(jmsTemplate, true, topicDestination());
     }
 
     @Bean
