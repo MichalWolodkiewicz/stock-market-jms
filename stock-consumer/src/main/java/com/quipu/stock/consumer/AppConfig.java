@@ -14,15 +14,17 @@ import org.springframework.jms.support.converter.MessageType;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.jms.ConnectionFactory;
-import java.util.UUID;
 
 @Configuration
 @EnableScheduling
 @EnableJms
 public class AppConfig {
 
-    @Value("${jms.clientIdPrefix}")
-    private String clientIdPrefix;
+    @Value("${jms.clientId}")
+    private String clientId;
+
+    @Value("${jms.destination.durable}")
+    private boolean isDurable;
 
     @Bean
     @Profile("directDestinationEnabled")
@@ -36,16 +38,15 @@ public class AppConfig {
     @Bean
     @Profile("topicDestinationEnabled")
     JmsListenerContainerFactory topicJmsConnectionFactory(SingleConnectionFactory connectionFactory, DefaultJmsListenerContainerFactoryConfigurer configurer) {
-        connectionFactory.setClientId(generateClientPrefix());
+        connectionFactory.setClientId(clientId);
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setMessageConverter(jacksonJmsMessageConverter());
         configurer.configure(factory, connectionFactory);
         factory.setPubSubDomain(true);
+        if (isDurable) {
+            factory.setSubscriptionDurable(true);
+        }
         return factory;
-    }
-
-    private String generateClientPrefix() {
-        return clientIdPrefix + "-" + UUID.randomUUID().toString().substring(0, 4);
     }
 
     @Bean

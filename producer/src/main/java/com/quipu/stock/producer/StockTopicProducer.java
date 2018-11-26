@@ -28,6 +28,6 @@ public class StockTopicProducer {
         int price = new Random().nextInt(100);
         StockPriceDTO stockPriceDTO = new StockPriceDTO(UUID.randomUUID().toString(), "google", String.valueOf(price));
         jmsTemplate.convertAndSend(topicDestination, stockPriceDTO);
-        System.out.println("Stock price produced to topic queue");
+        System.out.println("Stock price produced to topic queue " + stockPriceDTO.getUuid());
     }
 }

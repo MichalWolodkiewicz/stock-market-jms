@@ -14,6 +14,7 @@ services:
       - spring.profiles.active=${DESTINATION_PROFILES}
       - jms.destination.direct.name=${DESTINATION_DIRECT_NAME}
       - jms.destination.topic.name=${DESTINATION_TOPIC_NAME}
+      - jms.destination.durable=${DESTINATION_DURABLE}
     depends_on:
       - stock-market-activemq
   stock-market-producer:

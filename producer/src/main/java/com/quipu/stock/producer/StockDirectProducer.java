@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Profile("directDestinationEnabled")
 public class StockDirectProducer {
-    
+
     private final JmsTemplate jmsTemplate;
     @Qualifier("directDestination")
     private final Destination directDestination;
@@ -28,6 +28,6 @@ public class StockDirectProducer {
         int price = new Random().nextInt(100);
         StockPriceDTO stockPriceDTO = new StockPriceDTO(UUID.randomUUID().toString(), "google", String.valueOf(price));
         jmsTemplate.convertAndSend(directDestination, stockPriceDTO);
-        System.out.println("Stock price produced to direct queue");
+        System.out.println("Stock price produced to direct queue" + stockPriceDTO.getUuid());
     }
 }
