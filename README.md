@@ -12,8 +12,7 @@ The following tools are required to work with the project:
  - maven 3.3.9 or later
  - [optional] docker and docker compose
  
-Producer publishes stock information with fixed interval. Different consumers behaviour can be 
-achieved using dedicated docker compose files.
+Producer publishes stock information with fixed interval. The behaviour of the application can be configured via .env file. The following properties can be modified: 
  
  
 ## External sources
